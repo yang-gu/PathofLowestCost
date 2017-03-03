@@ -8,6 +8,14 @@ public class Step {
     private int row;
     private int cost;
 
+    @Override
+    public Step clone(){
+            Step step = new Step();
+            step.setCost(this.getCost());
+            step.setRow(this.getRow());
+            return step;
+    }
+
     public int getRow() {
         return row;
     }

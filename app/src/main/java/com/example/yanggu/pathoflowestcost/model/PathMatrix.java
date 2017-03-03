@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PathMatrix {
 
-    private final int offset = -1;
+    // A list of lists, each list is a column
 
     private List<List<Integer>> matrixRepresentation = new ArrayList<List<Integer>>();
 
@@ -29,6 +29,7 @@ public class PathMatrix {
         return matrixRepresentation.get(i);
     }
 
+    // gets value of current cell. Gets the column first, then gets the displacement from top.
     public int getValue(int x, int y) {
         System.out.println("x is " + x + ", y is " + y);
         System.out.println("column x is " + matrixRepresentation.get(x).size() + " units tall");

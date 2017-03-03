@@ -20,11 +20,12 @@ import static org.junit.Assert.*;
 public class POLCTest {
     @Test
     public void matrixesAreCorrect() throws Exception {
-        testTrivial();
-        testRow();
-        testColumn();
-        testOverrun();
-        testNoPath();
+        //testTrivial();
+        //testRow();
+        //testColumn();
+        //testOverrun();
+        //testNoPath();
+        testNegativePath();
     }
 
     public void testTrivial() {
@@ -38,7 +39,7 @@ public class POLCTest {
         Step testStep = new Step();
         testStep.setCost(1);
         testStep.setRow(1);
-        SolutionPath testPath = new SolutionPath();
+        SolutionPath testPath = new SolutionPath(pathMatrix);
         testPath.add(testStep);
         assertTrue(tester.terminates(derivedPath));
         assertTrue(derivedPath.equals(testPath));
@@ -57,7 +58,7 @@ public class POLCTest {
         Tester tester = new Tester(pathMatrix);
         SolutionPath derivedPath = tester.navigate();
 
-        SolutionPath testPath = new SolutionPath();
+        SolutionPath testPath = new SolutionPath(pathMatrix);
         for (int i = 0; i < 5; i++) {
             Step step = new Step();
             step.setRow(1);
@@ -154,8 +155,64 @@ public class POLCTest {
 
         System.out.println("length of derived path is " +derivedPath.getCost());
 
-        //assertTrue(derivedPath.getCost() == 48);
+        assertTrue(derivedPath.getCost() == 48);
         assertTrue(derivedPath.size() == 3);
+    }
+
+    public void testNegativePath() {
+        PathMatrix pathMatrix = new PathMatrix();
+
+        List<Integer> list1 = new ArrayList<Integer>();
+
+        list1.add(6);
+        list1.add(-5);
+        list1.add(3);
+        list1.add(9);
+
+
+        List<Integer> list2 = new ArrayList<Integer>();
+
+        list2.add(3);
+        list2.add(2);
+        list2.add(-2);
+        list2.add(-1);
+
+
+        List<Integer> list3 = new ArrayList<Integer>();
+
+        list3.add(-5);
+        list3.add(4);
+        list3.add(6);
+        list3.add(-2);
+
+        List<Integer> list4 = new ArrayList<Integer>();
+
+        list4.add(9);
+        list4.add(10);
+        list4.add(10);
+        list4.add(10);
+
+
+        pathMatrix.addColumn(list1);
+        pathMatrix.addColumn(list2);
+        pathMatrix.addColumn(list3);
+        pathMatrix.addColumn(list4);
+
+        Tester tester = new Tester(pathMatrix);
+
+        SolutionPath derivedPath = tester.navigate();
+
+        System.out.println("length of derived path is " +derivedPath.getCost());
+
+        assertTrue(derivedPath.getCost() == 0);
+        assertTrue(derivedPath.size() == 4);
+        assertTrue(derivedPath.get(0).getRow() == 2);
+        assertTrue(derivedPath.get(1).getRow() == 3);
+        assertTrue(derivedPath.get(2).getRow() == 4);
+        assertTrue(derivedPath.get(3).getRow() == 1);
+
+
+
     }
 
 
