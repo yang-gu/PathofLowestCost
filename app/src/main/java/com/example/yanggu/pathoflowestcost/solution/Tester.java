@@ -24,7 +24,8 @@ public class Tester {
         List<SolutionPath> listOfPaths = new ArrayList<SolutionPath>();
 
         for (int i = 0; i < pathMatrix.getHeight(); i++) {
-            listOfPaths.add(iterate(new SolutionPath(), 0, i));
+            // goes down 1st row
+            listOfPaths.add(iterate(new SolutionPath(pathMatrix), 0, i));
         }
 
         System.out.println("1234 navigate's path list size is " +listOfPaths.size());
@@ -36,11 +37,13 @@ public class Tester {
     //This is a recursive function. It takes a SolutionPath and an element designation in the form of
     //an x, y pair.
 
-    public SolutionPath iterate(SolutionPath path, int x, int y) {
+    private SolutionPath iterate(SolutionPath path, int x, int y) {
         System.out.println("1234 iterate");
         System.out.println("1234 x is " + x + ", y is " + y);
         if (terminates(path))
             return path;
+
+        //tries out current cell to be added. If it adds up to more than 50 then this path is returned.
 
         int test = path.getCost() + pathMatrix.getValue(x, y);
         if (test > 50)
@@ -50,17 +53,16 @@ public class Tester {
 
         System.out.println("1234 path size is " + path.size());
 
-
+        // If the current path isn't terminal, and doesn't add up to over 50, we add the current cell
         Step step = new Step();
         step.setRow(y + 1);
         step.setCost(pathMatrix.getValue(x, y));
         path.add(step);
 
+
         System.out.println("1234 path size is " + path.size());
 
-
         System.out.println("navigated path size is " + path.size() + ", navigated path cost is " + path.getCost());
-
 
         if (terminates(path))
             return path;
@@ -68,8 +70,10 @@ public class Tester {
 
         List<SolutionPath> listOfPaths = new ArrayList<SolutionPath>();
 
+        // looks at the rows above, level, and below
+
         for (int i = -1; i < 2; i++) {
-            listOfPaths.add(iterate(path, x + 1, normalizeIndex(y + i)));
+            listOfPaths.add(iterate(path.clone(), x + 1, normalizeIndex(y + i)));
         }
 
         System.out.println("first path cost is" + listOfPaths.get(0).getCost());
@@ -145,4 +149,5 @@ public class Tester {
 
         return solutionPathList;
     }
+
 }
