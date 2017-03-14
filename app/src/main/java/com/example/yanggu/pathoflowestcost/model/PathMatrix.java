@@ -31,9 +31,6 @@ public class PathMatrix {
 
     // gets value of current cell. Gets the column first, then gets the displacement from top.
     public int getValue(int x, int y) {
-        System.out.println("x is " + x + ", y is " + y);
-        System.out.println("column x is " + matrixRepresentation.get(x).size() + " units tall");
-
         return matrixRepresentation.get(x).get(y);
 
     }

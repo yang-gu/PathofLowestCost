@@ -2,6 +2,7 @@ package com.example.yanggu.pathoflowestcost;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -89,6 +90,7 @@ int width, height;
                 editText.setTextSize(30);
                 editText.setWidth(200);
                 editText.setHeight(200);
+                editText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 column.add(editText);
                 linearLayout.addView(editText);
             }
@@ -104,7 +106,13 @@ int width, height;
             List<Integer> column = new ArrayList<Integer>();
 
             for (int heightIndex = 0; heightIndex < height; heightIndex++){
-                column.add(Integer.parseInt(editTextGrid.get(widthIndex).get(heightIndex).getText().toString()));
+                int value;
+                if (editTextGrid.get(widthIndex).get(heightIndex).getText().length() == 0) {
+                    value = 0;
+                } else {
+                    value = Integer.parseInt(editTextGrid.get(widthIndex).get(heightIndex).getText().toString());
+                }
+                column.add(value);
             }
 
             pathmatrix.addColumn(column);

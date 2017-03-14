@@ -3,6 +3,7 @@ package com.example.yanggu.pathoflowestcost;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +30,8 @@ public class Dimensions extends Activity {
 
         enterWidth = (EditText)findViewById(R.id.matrix_width_field);
         enterHeight = (EditText)findViewById(R.id.matrix_height_field);
+        enterWidth.setInputType(InputType.TYPE_CLASS_NUMBER);
+        enterHeight.setInputType(InputType.TYPE_CLASS_NUMBER);
         warning = (TextView) findViewById(R.id.warning);
         a = this;
 

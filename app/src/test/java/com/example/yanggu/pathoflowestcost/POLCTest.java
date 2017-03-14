@@ -2,7 +2,6 @@ package com.example.yanggu.pathoflowestcost;
 
 import com.example.yanggu.pathoflowestcost.model.PathMatrix;
 import com.example.yanggu.pathoflowestcost.model.Step;
-import com.example.yanggu.pathoflowestcost.solution.Path;
 import com.example.yanggu.pathoflowestcost.solution.SolutionPath;
 import com.example.yanggu.pathoflowestcost.solution.Tester;
 
@@ -19,15 +18,6 @@ import static org.junit.Assert.*;
 
 public class POLCTest {
     @Test
-    public void matrixesAreCorrect() throws Exception {
-        //testTrivial();
-        //testRow();
-        //testColumn();
-        //testOverrun();
-        //testNoPath();
-        testNegativePath();
-    }
-
     public void testTrivial() {
         PathMatrix pathMatrix = new PathMatrix();
 
@@ -46,6 +36,7 @@ public class POLCTest {
         assertTrue(derivedPath.getCost() == 1);
     }
 
+    @Test
     public void testRow() {
         PathMatrix pathMatrix = new PathMatrix();
 
@@ -66,9 +57,6 @@ public class POLCTest {
             testPath.add(step);
         }
 
-        System.out.println("1234 derived path cost is " + derivedPath.getCost());
-        System.out.println("1234 test path cost is " + testPath.getCost());
-
         assertTrue(derivedPath.getCost() == testPath.getCost());
 
         for (int i = 0; i < 5; i++) {
@@ -77,6 +65,7 @@ public class POLCTest {
 
     }
 
+    @Test
     public void testColumn() {
         PathMatrix pathMatrix = new PathMatrix();
 
@@ -97,6 +86,7 @@ public class POLCTest {
         assertTrue(derivedPath.getCost() == 3);
     }
 
+    @Test
     public void testOverrun() {
         PathMatrix pathMatrix = new PathMatrix();
 
@@ -117,6 +107,7 @@ public class POLCTest {
 
     }
 
+    @Test
     public void testNoPath() {
         PathMatrix pathMatrix = new PathMatrix();
 
@@ -153,12 +144,11 @@ public class POLCTest {
 
         SolutionPath derivedPath = tester.navigate();
 
-        System.out.println("length of derived path is " +derivedPath.getCost());
-
         assertTrue(derivedPath.getCost() == 48);
         assertTrue(derivedPath.size() == 3);
     }
 
+    @Test
     public void testNegativePath() {
         PathMatrix pathMatrix = new PathMatrix();
 
@@ -202,17 +192,12 @@ public class POLCTest {
 
         SolutionPath derivedPath = tester.navigate();
 
-        System.out.println("length of derived path is " +derivedPath.getCost());
-
         assertTrue(derivedPath.getCost() == 0);
         assertTrue(derivedPath.size() == 4);
         assertTrue(derivedPath.get(0).getRow() == 2);
         assertTrue(derivedPath.get(1).getRow() == 3);
         assertTrue(derivedPath.get(2).getRow() == 4);
         assertTrue(derivedPath.get(3).getRow() == 1);
-
-
-
     }
 
 
