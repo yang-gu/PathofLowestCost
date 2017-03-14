@@ -28,8 +28,6 @@ public class Tester {
             listOfPaths.add(iterate(new SolutionPath(pathMatrix), 0, i));
         }
 
-        System.out.println("1234 navigate's path list size is " +listOfPaths.size());
-
         return getBestPath(listOfPaths);
 
     }
@@ -38,8 +36,6 @@ public class Tester {
     //an x, y pair.
 
     private SolutionPath iterate(SolutionPath path, int x, int y) {
-        System.out.println("1234 iterate");
-        System.out.println("1234 x is " + x + ", y is " + y);
         if (terminates(path))
             return path;
 
@@ -48,21 +44,12 @@ public class Tester {
         int test = path.getCost() + pathMatrix.getValue(x, y);
         if (test > 50)
             return path;
-        System.out.println("x is " + x);
-        System.out.println("width is " + pathMatrix.getWidth());
-
-        System.out.println("1234 path size is " + path.size());
 
         // If the current path isn't terminal, and doesn't add up to over 50, we add the current cell
         Step step = new Step();
         step.setRow(y + 1);
         step.setCost(pathMatrix.getValue(x, y));
         path.add(step);
-
-
-        System.out.println("1234 path size is " + path.size());
-
-        System.out.println("navigated path size is " + path.size() + ", navigated path cost is " + path.getCost());
 
         if (terminates(path))
             return path;
@@ -76,21 +63,12 @@ public class Tester {
             listOfPaths.add(iterate(path.clone(), x + 1, normalizeIndex(y + i)));
         }
 
-        System.out.println("first path cost is" + listOfPaths.get(0).getCost());
-        System.out.println("1234 first path length is " + listOfPaths.get(0).size());
-
         return getBestPath(listOfPaths);
     }
 
     public boolean terminates(SolutionPath solutionPath) {
-        System.out.println("Path size is " + solutionPath.size() + ", matrix width is " + pathMatrix.getWidth());
         return solutionPath.size() == pathMatrix.getWidth();
     }
-
-    /*
-    private static SolutionPath iterate(PathMatrix pathMatrix, Path path) {
-
-    }*/
 
     private int normalizeIndex(int test) {
         if (test < 0)
@@ -103,9 +81,7 @@ public class Tester {
     private SolutionPath getBestPath(List<SolutionPath> solutionPathList) {
         if (solutionPathList!= null && solutionPathList.size() > 0) {
             filterByLength(solutionPathList);
-            System.out.println("1234 filtering by length leaves us with " + solutionPathList.size() + " paths");
             filterByCost(solutionPathList);
-            System.out.println("1234 filtering by cost leaves us with " + solutionPathList.size() + " paths");
             return solutionPathList.get(0);
         }
 
@@ -139,7 +115,6 @@ public class Tester {
                 lowest = solutionPath.getCost();
         }
 
-        System.out.println("1234 lowest cost is " + lowest);
         Iterator it = solutionPathList.iterator();
 
         while (it.hasNext()) {
